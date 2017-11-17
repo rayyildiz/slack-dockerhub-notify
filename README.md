@@ -2,7 +2,7 @@ Slack DockerHub Notification On Google AppEngine
 ===
 
 [![Build Status](https://travis-ci.org/rayyildiz/slack-dockerhub-notify.svg?branch=master)](https://travis-ci.org/rayyildiz/slack-dockerhub-notify)
-[![Build status](https://ci.appveyor.com/api/projects/status/5t4rr33x0jpp4qt1?svg=true)](https://ci.appveyor.com/project/rayyildiz/slack-dockerhub-notify)
+[![Build status](https://ci.appveyor.com/api/projects/status/hnp5ttq9yeewgfan?svg=true)](https://ci.appveyor.com/project/rayyildiz/slack-dockerhub-notify)
 
 
 Enable Incoming WebHook
