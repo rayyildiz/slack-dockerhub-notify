@@ -1,0 +1,11 @@
+runtime: go
+application: slack-dockerhub-notify
+version: 2
+api_version: go1
+
+handlers:
+- url: /resources
+  static_dir: resources
+  
+- url: /.*
+  script: _go_app
