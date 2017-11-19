@@ -101,18 +101,11 @@ var tmpl = template.Must(template.New("index").Parse(`
 	<head>
     <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width">
-		<title>Slack Notification.</title>
+		<title>Slack DockerHub Notification</title>
+		<meta name="keywords" content="slack,golang,notification,docker,docker hub">
 		<link rel="stylesheet" href="//unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.8.2/showdown.min.js" type="text/javascript"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-
-			<!--[if lte IE 8]>
-          <link rel="stylesheet" href="//unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">
-      <![endif]-->
-      <!--[if gt IE 8]><!-->
-          <link rel="stylesheet" href="//unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
-      <!--<![endif]-->
-
 		<script async src="//www.googletagmanager.com/gtag/js?id=UA-49404964-3"></script>
 		<script>
 		  window.dataLayer = window.dataLayer || [];
@@ -124,12 +117,46 @@ var tmpl = template.Must(template.New("index").Parse(`
 
 	</head>
 	<body>
-		<div  class="custom-wrapper" style="margin:1em">
+		<div style="margin:1em">
+
+<form class="pure-form pure-form-aligned">
+		<h1>Create a webhook URL.</h1>
+		<h4>Enter your slack webhook url and click convert button</h4>
+		<div class="pure-control-group">
+			<input class="pure-input-2-3" id="input_url" type="text" placeholder="Enter Slack Web Income URL. example https://hooks.slack.com/services/T123456789/000000000000000/777777777777777777777">
+			<a href="#" onclick="javascript:convertURL()" class="pure-button pure-button-primary pure-input-1-3">Convert</a>
+		</div>
+		<p id="error_text"></p>
+		<div id="div_result" class="pure-control-group hidden">
+			<h3>Create a webhook on dockerhub and use this url: </h3>
+			<input class="pure-input-1" readonly id="result_url" type="text" placeholder="Result">
+		</div>
+</form>
+			<br /><hr /> <br />
+
 			<div id="html" style="visibility:visible"></div>
 		</center>
-			<div id="markdown" style="visibility:hidden">{{.}}</div>
+			<div id="markdown" style="visibility:hidden">
+{{.}}
+			</div>
 
 			<script type="text/javascript">
+
+				function convertURL() {
+						$('#div_result').attr('class','pure-control-group hidden');
+						$('#error_text').html(' ');
+
+						var text = $('#input_url').val();
+						ind = text.indexOf("https://hooks.slack.com/services/")
+						if (ind != 0 ) {
+							$('#error_text').html('URL should like <b>https://hooks.slack.com/services/T123456789/000000000000000/777777777777777777777</b>');
+						} else {
+							rest = text.substring(ind+23);
+
+							$('#result_url').val(window.location.protocol + '//' + window.location.hostname + rest);
+							$('#div_result').attr('class','pure-control-group');
+						}
+				}
 				$( document ).ready(function() {
 					 var text = $('#markdown').html();
 					 converter = new showdown.Converter();
