@@ -31,10 +31,10 @@ Changed the ```name``` and ```version``` on [app.yaml](app.yaml).
 Run this command to deploy your project to AppEngine. ```goapp``` should be in the **path** variable. [More info](https://cloud.google.com/appengine/docs/standard/go/download)
 
 ```bash
-goapp deploy app.yaml
+goapp deploy app.yaml --project [PROJECT-ID]
 ```
 
-URL should be like ```https://slack-dockerhub-notify.appspot.com/```. [More Info](https://docs.docker.com/docker-hub/webhooks/) .
+URL should be like ```https://slack-notify.rayyildiz.dev/```. [More Info](https://docs.docker.com/docker-hub/webhooks/) .
 
-WebHook URL must be ```https://slack-dockerhub-notify.appspot.com/services/T123456789/000000000000000/777777777777777777777``` .
-Change the ```https://hooks.slack.com``` with ```https://slack-dockerhub-notify.appspot.com```
+WebHook URL must be ```https://slack-notify.rayyildiz.dev/services/T123456789/000000000000000/777777777777777777777``` .
+Change the ```https://hooks.slack.com``` with ```https://slack-notify.rayyildiz.dev```

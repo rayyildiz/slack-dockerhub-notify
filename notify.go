@@ -1,4 +1,4 @@
-package notify
+package main
 
 import (
 	"bytes"
@@ -8,8 +8,9 @@ import (
 	"html/template"
 	"io/ioutil"
 	"net/http"
+	"os"
 
-	"log"
+	log "github.com/sirupsen/logrus"
 
 	"google.golang.org/appengine"
 	"google.golang.org/appengine/urlfetch"
@@ -44,10 +45,7 @@ func send(ctx context.Context, webhookURL string, payload Payload) error {
 	}
 
 	client := urlfetch.Client(ctx)
-	res, err := client.Post(webhookURL, "application/json", b)
-	if res.StatusCode >= 400 {
-		return fmt.Errorf("Error sending msg. Status: %v", res.Status)
-	}
+	_, err = client.Post(webhookURL, "application/json", b)
 
 	return err
 }
@@ -106,15 +104,6 @@ var tmpl = template.Must(template.New("index").Parse(`
 		<link rel="stylesheet" href="//unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 		<script src="//cdnjs.cloudflare.com/ajax/libs/showdown/1.8.2/showdown.min.js" type="text/javascript"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
-		<script async src="//www.googletagmanager.com/gtag/js?id=UA-49404964-3"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-
-		  gtag('config', 'UA-49404964-3');
-		</script>
-
 	</head>
 	<body>
 		<div style="margin:1em">
@@ -176,11 +165,27 @@ func homepageHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	tmpl.Execute(w, fmt.Sprintf("%s", data))
+	if err := tmpl.Execute(w, fmt.Sprintf("%s", data)); err != nil {
+		log.Errorf("could not execute template, %v", err)
+	}
+
 }
 
-func init() {
+func main() {
+	log.SetOutput(os.Stdout)
+	// log.SetFormatter(&log.JSONFormatter{})
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
 	log.Println("Starting appengine")
 	http.HandleFunc("/", handler)
 	log.Println("Started appengine")
+
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatalf("could not start server :%s, %v", port, err)
+	}
+
 }

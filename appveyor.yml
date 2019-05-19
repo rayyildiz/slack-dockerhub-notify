@@ -4,28 +4,20 @@ version: "{build}"
 clone_folder: c:\gopath\src\github.com\rayyildiz\slack-dockerhub-notify
 
 environment:
-    GOPATH: c:\gopath
-    GOVERSION: 1.8.5
-    SDK_VERSION: 1.9.61
+  GOVERSION: 1.12.1
 
 init:
-    - git config --global core.autocrlf input
+  - git config --global core.autocrlf input
 
 install:
-    - choco install golang --version %GOVERSION% -y
-    - choco install bzr -y
-    - choco install wget -y
-    - wget -q https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_windows_amd64-%SDK_VERSION%.zip
-    - unzip -q go_appengine_sdk_windows_amd64-%SDK_VERSION%.zip -d C:\tools\
-    - set Path=c:\go\bin;C:\tools\go_appengine\;c:\gopath\bin;C:\Program Files (x86)\Bazaar\;C:\Program Files\Mercurial\;%Path%
-    - go version
-    - go env
-    - cd %GOPATH%/src/github.com/rayyildiz/slack-dockerhub-notify/
-    - goapp get .
+  - choco install golang --version %GOVERSION% -y
+  - go get .
 
 build: false
 deploy: false
 
 test_script:
-    - goapp build .
-    - goapp test . -bench=.
+  - go mod download
+  - go build .
+  - go test . -cover
+  - go test . -bench=.

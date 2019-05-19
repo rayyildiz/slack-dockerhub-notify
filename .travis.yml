@@ -1,22 +1,11 @@
 language: go
 go:
-- 1.7.x
-- 1.8.x
-- 1.9.x
-env:
-  global:
-  - SDK_VERSION="1.9.61"
-
-before_script:
-- SDK_URL=https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-$SDK_VERSION.zip
-- wget $SDK_URL -nv
-- unzip -q go_appengine_sdk_linux_amd64-$SDK_VERSION.zip
+  - 1.11.x
+  - 1.12.x
 
 script:
-- "./go_appengine/goapp get ."
-- "./go_appengine/goapp build ."
--  "./go_appengine/goapp test ."
--  go test . -bench=.
+  - env GO111MODULE=on go test . -cover
+  - env GO111MODULE=on go test . -bench=.
 
 notifications:
   email: false
