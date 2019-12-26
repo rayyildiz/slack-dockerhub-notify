@@ -5,6 +5,9 @@ Slack DockerHub Notification On Google AppEngine
 [![Build status](https://ci.appveyor.com/api/projects/status/hnp5ttq9yeewgfan?svg=true)](https://ci.appveyor.com/project/rayyildiz/slack-dockerhub-notify)
 
 
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
+
+
 Enable Incoming WebHook
 ---
 
