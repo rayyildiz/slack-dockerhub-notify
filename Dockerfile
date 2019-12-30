@@ -11,9 +11,8 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o slack-notify .
 
 
-FROM drone/ca-certs
+FROM rayyildiz/ca-certificates
 
-WORKDIR /apps
 COPY README.md .
 COPY resources .
 
