@@ -4,7 +4,7 @@ version: "{build}"
 clone_folder: c:\gopath\src\github.com\rayyildiz\slack-dockerhub-notify
 
 environment:
-  GOVERSION: 1.12.1
+  GOVERSION: 1.19.1
 
 init:
   - git config --global core.autocrlf input
