@@ -1,8 +1,7 @@
 Slack DockerHub Notification On Google AppEngine
 ===
 
-[![Build Status](https://travis-ci.org/rayyildiz/slack-dockerhub-notify.svg?branch=master)](https://travis-ci.org/rayyildiz/slack-dockerhub-notify)
-[![Build status](https://ci.appveyor.com/api/projects/status/hnp5ttq9yeewgfan?svg=true)](https://ci.appveyor.com/project/rayyildiz/slack-dockerhub-notify)
+[![build](https://github.com/rayyildiz/slack-dockerhub-notify/actions/workflows/go.yml/badge.svg)](https://github.com/rayyildiz/slack-dockerhub-notify/actions/workflows/go.yml)
 
 
 [![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run?git_repo=https://github.com/rayyildiz/slack-dockerhub-notify)
