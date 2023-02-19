@@ -16,3 +16,4 @@ _test
 _testmain.go
 .cover/
 *.iml
+slack-dockerhub-notify
